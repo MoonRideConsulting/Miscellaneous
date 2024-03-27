@@ -56,8 +56,6 @@ def main_dashboard():
     
     st.write(df)
 
-    print(merged_data[merged_data.geometry.isnull()])
-
     first_blank_index = df[df['ZIP Code'].isnull() | (df['ZIP Code'] == '')].index.min()
 
     # Enable the VegaFusion data transformer
@@ -72,6 +70,8 @@ def main_dashboard():
 
     # Convert the 'geometry' column to string to avoid serialization issues
     merged_data['geometry'] = merged_data['geometry'].astype(str)
+
+    st.write(merged_data[merged_data.geometry.isnull()])
 
     # Add the merged data as a GeoJson layer with tooltips
     folium.GeoJson(
