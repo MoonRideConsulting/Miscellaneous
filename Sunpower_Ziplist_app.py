@@ -52,7 +52,7 @@ def main_dashboard():
     alt.data_transformers.enable('vegafusion')
 
     # Load GeoJSON data for ZIP codes
-    geojson_data = gpd.read_file('ZIP_Codes.geojson')
+    zip_geojson = gpd.read_file('ZIP_Codes.geojson')
 
     # Merge the DataFrame with the GeoJSON data
     merged_data = zip_geojson.merge(df, left_on='zip_column_in_geojson', right_on='ZIP Code')
