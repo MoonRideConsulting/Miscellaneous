@@ -34,7 +34,7 @@ def main_dashboard():
         usecols=[0, 1, 2, 3]
     )
 
-    df['ZIP Code'] = df['ZIP Code'].astype(str).str.zfill(5)
+    df['ZIP Code'] = df['ZIP Code'].apply(lambda x: str(int(float(x))).zfill(5))
     
     st.write(df)
 
