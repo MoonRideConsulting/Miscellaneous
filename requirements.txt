@@ -3,3 +3,4 @@ geopandas==0.14.3
 altair==5.2.0
 git+https://github.com/streamlit/gsheets-connection
 pandas==2.2.1
+folium==0.16.0
