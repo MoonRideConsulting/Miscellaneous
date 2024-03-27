@@ -23,11 +23,20 @@ def password_protection():
     else:
         main_dashboard()
 
+# Define a function to create a tooltip text
+def create_tooltip(feature):
+    return folium.GeoJsonTooltip(fields=['ZIPCODE', 'New Tier'],
+                                 aliases=['ZIP Code:', 'New Tier:'],
+                                 localize=True).add_to(feature)
+
+
 def main_dashboard():
     st.markdown("<h1 style='text-align: center;'>SunPower Tiered Zip List Map</h1>", unsafe_allow_html=True)
     
     # Create a connection object.
     conn = st.connection("gsheets", type=GSheetsConnection)
+
+    m = folium.Map(location=[37.0902, -95.7129], zoom_start=5)  # Adjust the location and zoom level as needed
 
     df = conn.read(
         worksheet="Zips",
@@ -61,17 +70,22 @@ def main_dashboard():
     # Convert the 'geometry' column to string to avoid serialization issues
     merged_data['geometry'] = merged_data['geometry'].astype(str)
 
-    # Create the Altair visualization
-    chart = alt.Chart(merged_data).mark_geoshape().encode(
-        color='New Tier:Q',  # Assuming 'New Tier' is a quantitative measure
-        tooltip=['ZIP Code:N', 'State:N', 'New Tier:Q', 'UTILITY EXCEPTION:N']
-    ).properties(
-        width=500,
-        height=300
-    )
+    # Add the merged data as a GeoJson layer with tooltips
+    folium.GeoJson(
+        merged_data,
+        name='ZIP Codes',
+        style_function=lambda x: {
+            'fillColor': '#ffff00' if x['properties']['New Tier'] is None else '#ff0000',
+            'color': 'black',
+            'weight': 0.5,
+            'fillOpacity': 0.7
+        },
+        tooltip=create_tooltip
+    ).add_to(m)
 
-    # Display in Streamlit
-    st.altair_chart(chart, use_container_width=True)
+    # Add a layer control and then display the map
+    folium.LayerControl().add_to(m)
+    m
 
 if __name__ == '__main__':
     password_protection()
