@@ -65,6 +65,8 @@ def main_dashboard():
     zip_geojson = gpd.read_file('ZIP_Codes.geojson')
     zip_geojson['ZIPCODE'] = zip_geojson['ZIPCODE'].astype(str)
 
+    st.write(zip_geojson)
+
     # Merge the DataFrame with the GeoJSON data
     merged_data = zip_geojson.merge(df, left_on='ZIPCODE', right_on='ZIP Code')
 
