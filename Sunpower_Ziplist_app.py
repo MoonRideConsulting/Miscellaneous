@@ -35,7 +35,7 @@ def main_dashboard():
     )
 
     # Load GeoJSON data for ZIP codes
-    geojson_data = gpd.read_file('zip_codes.geojson')
+    geojson_data = gpd.read_file('ZIP_Codes.geojson')
 
     # Create an Altair chart
     chart = alt.Chart(geojson_data).mark_geoshape().encode(
