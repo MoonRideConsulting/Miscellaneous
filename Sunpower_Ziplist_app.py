@@ -3,6 +3,7 @@ from streamlit_gsheets import GSheetsConnection
 import geopandas as gpd
 import altair as alt
 import pandas as pd
+import folium
 
 st.set_page_config(page_title="SunPower Overview Dash",page_icon="🧑‍🚀",layout="wide")
 
