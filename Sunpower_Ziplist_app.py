@@ -34,6 +34,9 @@ def main_dashboard():
         usecols=[0, 1, 2, 3]
     )
 
+    # Enable the VegaFusion data transformer
+    alt.data_transformers.enable('vegafusion')
+
     # Load GeoJSON data for ZIP codes
     geojson_data = gpd.read_file('ZIP_Codes.geojson')
 
