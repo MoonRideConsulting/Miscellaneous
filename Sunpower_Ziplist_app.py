@@ -54,16 +54,23 @@ def main_dashboard():
     # Load GeoJSON data for ZIP codes
     geojson_data = gpd.read_file('ZIP_Codes.geojson')
 
-    # For simplicity, let's assume you're creating a bar chart of ZIP Codes and some value
-    chart = alt.Chart(df).mark_bar().encode(
-        x='ZIP Code:N',  # Treat ZIP Code as a nominal (categorical) type
-        y='YourValueColumn:Q',  # Replace YourValueColumn with the actual column name
-        tooltip=['ZIP Code:N', 'State:N', 'New Tier:N', 'UTILITY EXCEPTION:N']  # Adjust tooltips as needed
+    # Merge the DataFrame with the GeoJSON data
+    merged_data = zip_geojson.merge(df, left_on='zip_column_in_geojson', right_on='ZIP Code')
+
+    # Convert the 'geometry' column to string to avoid serialization issues
+    merged_data['geometry'] = merged_data['geometry'].astype(str)
+
+    # Create the Altair visualization
+    chart = alt.Chart(merged_data).mark_geoshape().encode(
+        color='New Tier:Q',  # Assuming 'New Tier' is a quantitative measure
+        tooltip=['ZIP Code:N', 'State:N', 'New Tier:Q', 'UTILITY EXCEPTION:N']
+    ).properties(
+        width=500,
+        height=300
     )
 
-    # Display the chart in Streamlit
+    # Display in Streamlit
     st.altair_chart(chart, use_container_width=True)
-
 
 if __name__ == '__main__':
     password_protection()
