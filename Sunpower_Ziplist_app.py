@@ -73,6 +73,8 @@ def main_dashboard():
 
     st.write(merged_data[merged_data.geometry.isnull()])
 
+    break
+
     # Add the merged data as a GeoJson layer with tooltips
     folium.GeoJson(
         merged_data,
