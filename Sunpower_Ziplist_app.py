@@ -65,13 +65,13 @@ def main_dashboard():
     zip_geojson = gpd.read_file('ZIP_Codes.geojson')
     zip_geojson['ZIPCODE'] = zip_geojson['ZIPCODE'].astype(str)
 
-    st.write(zip_geojson)
-
     # Merge the DataFrame with the GeoJSON data
     merged_data = zip_geojson.merge(df, left_on='ZIPCODE', right_on='ZIP Code')
 
     # Convert the 'geometry' column to string to avoid serialization issues
     merged_data['geometry'] = merged_data['geometry'].astype(str)
+
+    st.write(merged_data)
 
     # Add the merged data as a GeoJson layer with tooltips
     folium.GeoJson(
