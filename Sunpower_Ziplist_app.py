@@ -34,6 +34,8 @@ def main_dashboard():
         usecols=[0, 1, 2, 3]
     )
 
+    st.write(df)
+
     # Enable the VegaFusion data transformer
     alt.data_transformers.enable('vegafusion')
 
