@@ -21,7 +21,7 @@ def password_protection():
         main_dashboard()
 
 def main_dashboard():
-    st.markdown("<h1 style='text-align: center;'>SunPower Overview Dash</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>SunPower Tiered Zip List Map</h1>", unsafe_allow_html=True)
     
     # Create a connection object.
     conn = st.connection("gsheets", type=GSheetsConnection)
