@@ -54,18 +54,11 @@ def main_dashboard():
     # Load GeoJSON data for ZIP codes
     geojson_data = gpd.read_file('ZIP_Codes.geojson')
 
-    # Create an Altair chart
-    chart = alt.Chart(geojson_data).mark_geoshape().encode(
-        color='New Tier:Q',  # Quantitative color scale based on the New Tier values
-        tooltip=['ZIP Code:N', 'State:N', 'New Tier:Q', 'UTILITY EXCEPTION:N']  # Tooltip content
-    ).transform_lookup(
-        lookup='id',
-        from_=alt.LookupData(df, 'ZIP Code', ['ZIP Code', 'State', 'New Tier', 'UTILITY EXCEPTION'])
-    ).project(
-        type='albersUsa'  # Projection type for the USA; change if needed
-    ).properties(
-        width=800,
-        height=400
+    # For simplicity, let's assume you're creating a bar chart of ZIP Codes and some value
+    chart = alt.Chart(df).mark_bar().encode(
+        x='ZIP Code:N',  # Treat ZIP Code as a nominal (categorical) type
+        y='YourValueColumn:Q',  # Replace YourValueColumn with the actual column name
+        tooltip=['ZIP Code:N', 'State:N', 'New Tier:N', 'UTILITY EXCEPTION:N']  # Adjust tooltips as needed
     )
 
     # Display the chart in Streamlit
