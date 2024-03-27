@@ -56,6 +56,8 @@ def main_dashboard():
     
     st.write(df)
 
+    print(merged_data[merged_data.geometry.isnull()])
+
     first_blank_index = df[df['ZIP Code'].isnull() | (df['ZIP Code'] == '')].index.min()
 
     # Enable the VegaFusion data transformer
