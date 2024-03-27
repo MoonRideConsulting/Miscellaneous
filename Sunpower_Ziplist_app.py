@@ -71,10 +71,6 @@ def main_dashboard():
     # Convert the 'geometry' column to string to avoid serialization issues
     merged_data['geometry'] = merged_data['geometry'].astype(str)
 
-    st.write(merged_data[merged_data.geometry.isnull()])
-
-    break
-
     # Add the merged data as a GeoJson layer with tooltips
     folium.GeoJson(
         merged_data,
