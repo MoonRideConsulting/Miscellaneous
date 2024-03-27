@@ -34,10 +34,18 @@ def main_dashboard():
         usecols=[0, 1, 2, 3]
     )
 
+    # Find the index of the first row where the ZIP Code is blank or NaN
+    first_blank_index = df[df['ZIP Code'].isnull() | (df['ZIP Code'] == '')].index.min()
+
+    # If there's a blank entry, slice the DataFrame to exclude any rows after the first blank entry
+    if pd.notnull(first_blank_index):
+        df = df.loc[:first_blank_index - 1]
+    
     df['ZIP Code'] = df['ZIP Code'].apply(lambda x: str(int(float(x))).zfill(5))
     
     st.write(df)
 
+    first_blank_index = df[df['ZIP Code'].isnull() | (df['ZIP Code'] == '')].index.min()
 
     # Enable the VegaFusion data transformer
     alt.data_transformers.enable('vegafusion')
