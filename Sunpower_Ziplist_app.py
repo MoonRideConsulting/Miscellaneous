@@ -7,8 +7,7 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 df = conn.read(
     worksheet="Zips",
     ttl="10m",
-    usecols=[0, 1],
-    nrows=3,
+    usecols=[0, 1, 2, 3]
 )
 
 st.write(df)
