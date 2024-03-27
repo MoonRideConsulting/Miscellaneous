@@ -36,6 +36,8 @@ def main_dashboard():
 
     st.write(df)
 
+    df['ZIP Code'] = df['ZIP Code'].astype(str).str.zfill(5)
+
     # Enable the VegaFusion data transformer
     alt.data_transformers.enable('vegafusion')
 
