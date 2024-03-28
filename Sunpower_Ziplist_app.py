@@ -122,16 +122,14 @@ def main_dashboard():
             geojson_url = f'{base_url}{geojson_filename}'
         
             response = requests.get(geojson_url)
-            st.write(response)
-            st.write(state)
             if response.status_code == 200:
                 with open(os.path.join(geojson_dir, geojson_filename), 'wb') as f:
                     f.write(response.content)
-                print(f'Downloaded {geojson_filename}')
+                st.write(f'Downloaded {geojson_filename}')
             else:
-                print(f'Failed to download {geojson_filename}')
+                st.write(f'Failed to download {geojson_filename}')
         else:
-            print(f'GeoJSON file for {state} not found in the mapping.')
+            st.write(f'GeoJSON file for {state} not found in the mapping.')
     
     # Load GeoJSON data for ZIP codes
     #zip_geojson = gpd.read_file('ZIP_Codes.geojson')
