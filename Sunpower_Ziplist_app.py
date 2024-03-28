@@ -93,6 +93,17 @@ def main_dashboard():
     st.plotly_chart(fig, use_container_width=True)
 
 
+    # Convert ZIP code columns to string if they are not already
+    df['ZIP Code'] = df['ZIP Code'].astype(str)
+    merged_data['ZIP'] = merged_data['ZIP'].astype(str)  # Adjust the column name 'ZIP' as per your merged_data
+
+    # Find ZIP codes in df that are not in merged_data
+    missing_zips = set(df['ZIP Code']) - set(merged_data['ZIP'])
+
+    # Convert the set to a list
+    missing_zip_list = list(missing_zips)
+    st.write("Missing ZIP codes:", missing_zip_list)
+
 
 if __name__ == '__main__':
     password_protection()
