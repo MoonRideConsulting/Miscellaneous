@@ -73,15 +73,19 @@ def main_dashboard():
 
     # Generate the choropleth map
     fig = px.choropleth(merged_data,
-                        geojson=merged_data.geometry,
-                        locations=merged_data.index,
-                        color="New Tier",  # Column from the CSV providing values for coloring
-                        color_continuous_scale="Viridis",  # or any other color scale
-                        scope="usa",
-                        labels={'New Tier': 'Tier Label'})  # Adjust label as needed
+                    geojson=merged_data.geometry.__geo_interface__,
+                    locations='ZCTA5CE10',
+                    color="New Tier",  # Adjust with your column name
+                    color_continuous_scale="Viridis",
+                    featureidkey="properties.ZCTA5CE10",
+                    scope="usa",
+                    labels={'New Tier': 'Tier Label'}  # Adjust label as needed
+                   )
 
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+    # Display the figure in Streamlit
     st.plotly_chart(fig)
 
 
