@@ -77,7 +77,7 @@ def main_dashboard():
     merged_data = gdf.merge(df, left_on='Zip', right_on='ZIP Code')
 
     # Assuming your DataFrame 'df' has a 'State' column
-    states = merged_data['State'].unique()  # Get unique states from the data
+    states = merged_data['state'].unique()  # Get unique states from the data
 
     # Create a select box for state selection
     selected_state = st.multiselect('Select a State:', states)
