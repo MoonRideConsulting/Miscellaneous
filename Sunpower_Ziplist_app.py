@@ -73,7 +73,7 @@ def main_dashboard():
 
     # Generate the choropleth map
     fig = px.choropleth(merged_data,
-                    geojson=merged_data.geometry.__geo_interface__,
+                    geojson=merged_data.geometry.to_json(),
                     locations='ZCTA5CE10',
                     color="New Tier",  # Adjust with your column name
                     color_continuous_scale="Viridis",
