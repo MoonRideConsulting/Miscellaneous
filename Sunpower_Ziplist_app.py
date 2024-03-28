@@ -82,8 +82,6 @@ def main_dashboard():
                     labels={'New Tier': 'Tier Label'}  # Adjust label as needed
                    )
 
-    fig.update_geos(fitbounds="locations", visible=False)
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
     # Display the figure in Streamlit
     st.plotly_chart(fig)
