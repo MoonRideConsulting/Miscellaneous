@@ -130,6 +130,19 @@ def main_dashboard():
                 st.write(f'Failed to download {geojson_filename}')
         else:
             st.write(f'GeoJSON file for {state} not found in the mapping.')
+
+    # Step 1: Combine the GeoJSON files into a single GeoDataFrame
+    geojson_list = []
+    for geojson_file in os.listdir(geojson_dir):
+        if geojson_file.endswith('.json'):
+            file_path = os.path.join(geojson_dir, geojson_file)
+            gdf = gpd.read_file(file_path)
+            geojson_list.append(gdf)
+
+    # Concatenate all GeoDataFrames into a single one
+    combined_gdf = pd.concat(geojson_list, ignore_index=True)
+
+    st.write(combined_df)
     
     # Load GeoJSON data for ZIP codes
     #zip_geojson = gpd.read_file('ZIP_Codes.geojson')
