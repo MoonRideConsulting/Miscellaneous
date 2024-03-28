@@ -76,7 +76,9 @@ def main_dashboard():
     # Merge the DataFrame with the GeoJSON data
     merged_data = gdf.merge(df, left_on='Zip', right_on='ZIP Code')
 
-
+    st.write(df.shape)
+    st.write(merged_data.shape)
+    
     # Assuming 'df' is your DataFrame and it has 'lat' and 'lng' columns for latitude and longitude
     # and 'New Tier' as the column you want to visualize
     fig = px.scatter_geo(merged_data,
