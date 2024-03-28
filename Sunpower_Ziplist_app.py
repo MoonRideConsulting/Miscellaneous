@@ -72,9 +72,6 @@ def main_dashboard():
     # Load GeoJSON data for ZIP codes
     gdf['ZIP'] = gdf['ZIP'].astype(str)
 
-    st.write(gdf.columns)
-    st.write(df.columns)
-
     # Merge the DataFrame with the GeoJSON data
     merged_data = gdf.merge(df, left_on='ZIP', right_on='ZIP Code')
 
