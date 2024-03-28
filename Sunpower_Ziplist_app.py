@@ -69,6 +69,7 @@ def main_dashboard():
 
     st.write(merged_data.shape)
     st.write(merged_data)
+    st.write(merged_data.columns)
 
     # Generate the choropleth map
     fig = px.choropleth(merged_data,
