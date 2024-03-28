@@ -7,6 +7,8 @@ import folium
 import requests
 import os
 import plotly.express as px
+from geopy.geocoders import Nominatim
+
 
 st.set_page_config(page_title="SunPower Overview Dash",page_icon="🧑‍🚀",layout="wide")
 
@@ -27,6 +29,16 @@ def password_protection():
     else:
         main_dashboard()
 
+# Initialize the geolocator
+geolocator = Nominatim(user_agent="geoapiExercises")
+
+# Define the function to get latitude and longitude
+def get_lat_lon(zip_code):
+    location = geolocator.geocode(f"{zip_code}, USA")
+    if location:
+        return location.latitude, location.longitude
+    else:
+        return None, None
 
 def main_dashboard():
     st.markdown("<h1 style='text-align: center;'>SunPower Tiered Zip List Map</h1>", unsafe_allow_html=True)
@@ -52,25 +64,27 @@ def main_dashboard():
     # Enable the VegaFusion data transformer
     alt.data_transformers.enable('vegafusion')
 
-    # Identify the unique states in your dataset
-    states = df['State'].unique()
+    # Apply the function and create new columns
+    df[['Latitude', 'Longitude']] = df.apply(lambda row: get_lat_lon(row['ZIP Code']), axis=1, result_type='expand')
 
-    gdf = pd.read_csv('Zip_LatLog.csv')
+    # Identify the unique states in your dataset
+    #states = df['State'].unique()
+
+    #gdf = pd.read_csv('Zip_LatLog.csv')
     
     # Load GeoJSON data for ZIP codes
     #zip_geojson = gpd.read_file('ZIP_Codes.geojson')
-    gdf['ZIP'] = gdf['ZIP'].astype(str)
+    #gdf['ZIP'] = gdf['ZIP'].astype(str)
 
     # Merge the DataFrame with the GeoJSON data
-    merged_data = df.merge(gdf, left_on='Zip Code', right_on='ZIP')
+    #merged_data = df.merge(gdf, left_on='Zip Code', right_on='ZIP')
 
     # Convert the 'geometry' column to string to avoid serialization issues
     #merged_data['geometry'] = merged_data['geometry'].astype(str)
     
     st.write(df.shape)
-    st.write(merged_data.shape)
-    st.write(merged_data)
-    st.write(merged_data.columns)
+    st.write(df)
+
 
 
 if __name__ == '__main__':
