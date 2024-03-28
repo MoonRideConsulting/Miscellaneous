@@ -64,26 +64,21 @@ def main_dashboard():
     # Enable the VegaFusion data transformer
     alt.data_transformers.enable('vegafusion')
 
-    # Apply the function and create new columns
-    df[['Latitude', 'Longitude']] = df.apply(lambda row: get_lat_lon(row['ZIP Code']), axis=1, result_type='expand')
-
     # Identify the unique states in your dataset
     #states = df['State'].unique()
 
-    #gdf = pd.read_csv('Zip_LatLog.csv')
+    gdf = pd.read_csv('Zip_LatLog.csv')
     
     # Load GeoJSON data for ZIP codes
-    #zip_geojson = gpd.read_file('ZIP_Codes.geojson')
-    #gdf['ZIP'] = gdf['ZIP'].astype(str)
+    zip_geojson = gpd.read_file('ZIP_Codes.geojson')
+    gdf['ZIP'] = gdf['ZIP'].astype(str)
 
     # Merge the DataFrame with the GeoJSON data
-    #merged_data = df.merge(gdf, left_on='Zip Code', right_on='ZIP')
-
-    # Convert the 'geometry' column to string to avoid serialization issues
-    #merged_data['geometry'] = merged_data['geometry'].astype(str)
+    merged_data = df.merge(gdf, left_on='Zip Code', right_on='ZIP')
     
     st.write(df.shape)
-    st.write(df)
+    st.write(merged_data.shape)
+    st.write(merged_data)
 
 
 
