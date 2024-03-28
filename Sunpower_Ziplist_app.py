@@ -95,10 +95,10 @@ def main_dashboard():
 
     # Convert ZIP code columns to string if they are not already
     df['ZIP Code'] = df['ZIP Code'].astype(str)
-    merged_data['ZIP'] = merged_data['ZIP'].astype(str)  # Adjust the column name 'ZIP' as per your merged_data
+    merged_data['Zip'] = merged_data['Zip'].astype(str)  # Adjust the column name 'ZIP' as per your merged_data
 
     # Find ZIP codes in df that are not in merged_data
-    missing_zips = set(df['ZIP Code']) - set(merged_data['ZIP'])
+    missing_zips = set(df['ZIP Code']) - set(merged_data['Zip'])
 
     # Convert the set to a list
     missing_zip_list = list(missing_zips)
