@@ -55,36 +55,22 @@ def main_dashboard():
     # Identify the unique states in your dataset
     states = df['State'].unique()
 
-    gdf = pd.read_csv('geo_df_allstates(simple.01).csv')
+    gdf = pd.read_csv('Zip_LatLog.csv')
     
     # Load GeoJSON data for ZIP codes
     #zip_geojson = gpd.read_file('ZIP_Codes.geojson')
-    gdf['ZCTA5CE10'] = gdf['ZCTA5CE10'].astype(str)
+    gdf['ZIP'] = gdf['ZIP'].astype(str)
 
     # Merge the DataFrame with the GeoJSON data
-    merged_data = gdf.merge(df, left_on='ZCTA5CE10', right_on='ZIP Code')
+    merged_data = gdf.merge(df, left_on='ZIP', right_on='ZIP Code')
 
     # Convert the 'geometry' column to string to avoid serialization issues
     #merged_data['geometry'] = merged_data['geometry'].astype(str)
-
+    
+    st.write(df.shape)
     st.write(merged_data.shape)
     st.write(merged_data)
     st.write(merged_data.columns)
-
-    # Generate the choropleth map
-    fig = px.choropleth(merged_data,
-                    geojson=merged_data.geometry.to_json(),
-                    locations='ZCTA5CE10',
-                    color="New Tier",  # Adjust with your column name
-                    color_continuous_scale="Viridis",
-                    featureidkey="properties.ZCTA5CE10",
-                    scope="usa",
-                    labels={'New Tier': 'Tier Label'}  # Adjust label as needed
-                   )
-
-
-    # Display the figure in Streamlit
-    st.plotly_chart(fig)
 
 
 if __name__ == '__main__':
