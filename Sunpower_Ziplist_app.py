@@ -82,6 +82,8 @@ def main_dashboard():
                          lat='LAT',
                          lon='LNG',
                          color='New Tier',
+                         hover_name='ZIP Code',  # Show ZIP Code in the tooltip
+                         hover_data={'lat': False, 'lng': False, 'New Tier': True},
                          scope='usa',
                          color_continuous_scale='Viridis',
                          title='ZIP Code Data Visualization')
