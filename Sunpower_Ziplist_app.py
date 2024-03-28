@@ -76,16 +76,14 @@ def main_dashboard():
     # Merge the DataFrame with the GeoJSON data
     merged_data = gdf.merge(df, left_on='Zip', right_on='ZIP Code')
 
-    st.write(merged_data.columns)
-
     # Assuming your DataFrame 'df' has a 'State' column
-    states = merged_data['state'].unique()  # Get unique states from the data
+    states = merged_data['State_x'].unique()  # Get unique states from the data
 
     # Create a select box for state selection
     selected_state = st.multiselect('Select a State:', states)
 
     # Filter the DataFrame based on the selected state
-    merged_data = merged_data[merged_data['State'] == selected_state]
+    merged_data = merged_data[merged_data['State_x'].isin(selected_states)]
     
     # Assuming 'df' is your DataFrame and it has 'lat' and 'lng' columns for latitude and longitude
     # and 'New Tier' as the column you want to visualize
