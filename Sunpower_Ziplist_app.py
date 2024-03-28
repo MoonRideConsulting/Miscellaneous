@@ -61,7 +61,7 @@ def main_dashboard():
     gdf['ZCTA5CE10'] = gdf['ZCTA5CE10'].astype(str)
 
     # Merge the DataFrame with the GeoJSON data
-    merged_data = zip_geojson.merge(df, left_on='ZCTA5CE10', right_on='ZIP Code')
+    merged_data = gdf.merge(df, left_on='ZCTA5CE10', right_on='ZIP Code')
 
     # Convert the 'geometry' column to string to avoid serialization issues
     #merged_data['geometry'] = merged_data['geometry'].astype(str)
