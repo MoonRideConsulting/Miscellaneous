@@ -76,7 +76,7 @@ def main_dashboard():
     st.write(df.columns)
 
     # Merge the DataFrame with the GeoJSON data
-    merged_data = gdf.merge(df, left_on='ZIP', right_on='Zip Code')
+    merged_data = gdf.merge(df, left_on='ZIP', right_on='ZIP Code')
     
     st.write(df.shape)
     st.write(merged_data.shape)
