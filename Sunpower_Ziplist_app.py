@@ -70,7 +70,6 @@ def main_dashboard():
     gdf = pd.read_csv('Zip_LatLog.csv')
     
     # Load GeoJSON data for ZIP codes
-    zip_geojson = gpd.read_file('ZIP_Codes.geojson')
     gdf['ZIP'] = gdf['ZIP'].astype(str)
 
     # Merge the DataFrame with the GeoJSON data
