@@ -76,6 +76,8 @@ def main_dashboard():
     # Merge the DataFrame with the GeoJSON data
     merged_data = gdf.merge(df, left_on='Zip', right_on='ZIP Code')
 
+    st.write(merged_data.columns)
+
     # Assuming your DataFrame 'df' has a 'State' column
     states = merged_data['state'].unique()  # Get unique states from the data
 
