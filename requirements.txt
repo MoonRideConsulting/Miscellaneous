@@ -5,3 +5,4 @@ git+https://github.com/streamlit/gsheets-connection
 folium==0.16.0
 pandas>=1.5.3,<2
 plotly-express==0.4.1
+geopy==2.4.1
