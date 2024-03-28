@@ -79,10 +79,8 @@ def main_dashboard():
     # Assuming your DataFrame 'df' has a 'State' column
     states = merged_data['State_x'].unique()  # Get unique states from the data
 
-    selected_state = states
-
     # Create a select box for state selection
-    selected_state = st.multiselect('Select a State:', states)
+    selected_states = st.multiselect('Select a State:', states)
 
     # Filter the DataFrame based on the selected state
     merged_data = merged_data[merged_data['State_x'].isin(selected_states)]
