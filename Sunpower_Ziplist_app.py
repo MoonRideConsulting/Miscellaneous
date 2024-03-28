@@ -66,6 +66,7 @@ def main_dashboard():
     # Convert the 'geometry' column to string to avoid serialization issues
     #merged_data['geometry'] = merged_data['geometry'].astype(str)
 
+    st.write(merged_data.shape)
     st.write(merged_data)
 
 
