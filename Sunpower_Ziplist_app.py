@@ -71,9 +71,9 @@ def main_dashboard():
     st.write(merged_data)
 
     # Generate the choropleth map
-    fig = px.choropleth(merged_df,
-                        geojson=merged_df.geometry,
-                        locations=merged_df.index,
+    fig = px.choropleth(merged_data,
+                        geojson=merged_data.geometry,
+                        locations=merged_data.index,
                         color="New Tier",  # Column from the CSV providing values for coloring
                         color_continuous_scale="Viridis",  # or any other color scale
                         scope="usa",
