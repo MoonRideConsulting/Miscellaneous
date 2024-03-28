@@ -6,6 +6,7 @@ import pandas as pd
 import folium
 import requests
 import os
+import plotly.express as px
 
 st.set_page_config(page_title="SunPower Overview Dash",page_icon="🧑‍🚀",layout="wide")
 
