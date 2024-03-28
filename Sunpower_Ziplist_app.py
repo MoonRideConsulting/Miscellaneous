@@ -82,6 +82,17 @@ def main_dashboard():
     st.write(merged_data.shape)
     st.write(merged_data)
 
+    # Assuming 'df' is your DataFrame and it has 'lat' and 'lng' columns for latitude and longitude
+    # and 'New Tier' as the column you want to visualize
+    fig = px.scatter_geo(merged_data,
+                         lat='LAT',
+                         lon='LNG',
+                         color='New Tier',
+                         scope='usa',
+                         color_continuous_scale='Viridis',
+                         title='ZIP Code Data Visualization')
+    st.plotly_chart(fig)
+
 
 
 if __name__ == '__main__':
