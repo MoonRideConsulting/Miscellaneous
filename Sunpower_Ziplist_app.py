@@ -111,6 +111,10 @@ def main_dashboard():
     # Base URL for the GeoJSON files
     base_url = 'https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/'
 
+    # Directory to save the GeoJSON files
+    geojson_dir = 'geojson_files'
+    os.makedirs(geojson_dir, exist_ok=True)
+
     # Download the necessary GeoJSON files
     for state in states:
         if state in state_geojson_map:
@@ -126,10 +130,6 @@ def main_dashboard():
                 print(f'Failed to download {geojson_filename}')
         else:
             print(f'GeoJSON file for {state} not found in the mapping.')
-
-    # Directory to save the GeoJSON files
-    geojson_dir = 'geojson_files'
-    os.makedirs(geojson_dir, exist_ok=True)
     
     # Load GeoJSON data for ZIP codes
     #zip_geojson = gpd.read_file('ZIP_Codes.geojson')
