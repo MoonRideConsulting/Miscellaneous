@@ -69,6 +69,19 @@ def main_dashboard():
     st.write(merged_data.shape)
     st.write(merged_data)
 
+    # Generate the choropleth map
+    fig = px.choropleth(merged_df,
+                        geojson=merged_df.geometry,
+                        locations=merged_df.index,
+                        color="New Tier",  # Column from the CSV providing values for coloring
+                        color_continuous_scale="Viridis",  # or any other color scale
+                        scope="usa",
+                        labels={'New Tier': 'Tier Label'})  # Adjust label as needed
+
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.show()
+
 
 if __name__ == '__main__':
     password_protection()
