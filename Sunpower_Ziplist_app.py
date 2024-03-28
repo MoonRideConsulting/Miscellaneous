@@ -67,20 +67,21 @@ def main_dashboard():
     # Identify the unique states in your dataset
     #states = df['State'].unique()
 
-    gdf = pd.read_csv('Zip_LatLog.csv')
+    gdf = pd.read_csv('us_zip_codes_to_longitude_and_latitude.csv')
     
     # Load GeoJSON data for ZIP codes
-    gdf['ZIP'] = gdf['ZIP'].astype(str)
-
+    gdf['Zip'] = gdf['Zip'].astype(str)
+    gdf['Zip'] = gdf['Zip'].apply(lambda x: str(int(float(x))).zfill(5))
+    
     # Merge the DataFrame with the GeoJSON data
-    merged_data = gdf.merge(df, left_on='ZIP', right_on='ZIP Code')
+    merged_data = gdf.merge(df, left_on='Zip', right_on='ZIP Code')
 
 
     # Assuming 'df' is your DataFrame and it has 'lat' and 'lng' columns for latitude and longitude
     # and 'New Tier' as the column you want to visualize
     fig = px.scatter_geo(merged_data,
-                         lat='LAT',
-                         lon='LNG',
+                         lat='Latitude',
+                         lon='Longitude',
                          color='New Tier',
                          hover_name='ZIP',  # Show ZIP Code in the tooltip
                          hover_data={'LAT': False, 'LNG': False, 'New Tier': True},
