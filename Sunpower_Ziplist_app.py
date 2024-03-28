@@ -77,10 +77,7 @@ def main_dashboard():
 
     # Merge the DataFrame with the GeoJSON data
     merged_data = gdf.merge(df, left_on='ZIP', right_on='ZIP Code')
-    
-    st.write(df.shape)
-    st.write(merged_data.shape)
-    st.write(merged_data)
+
 
     # Assuming 'df' is your DataFrame and it has 'lat' and 'lng' columns for latitude and longitude
     # and 'New Tier' as the column you want to visualize
@@ -91,7 +88,7 @@ def main_dashboard():
                          scope='usa',
                          color_continuous_scale='Viridis',
                          title='ZIP Code Data Visualization')
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 
