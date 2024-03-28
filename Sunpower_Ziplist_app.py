@@ -104,7 +104,7 @@ def main_dashboard():
     missing_zip_list = list(missing_zips)
     st.write("Missing ZIP codes:", missing_zip_list)
 
-    missing_zip_df = df[df['ZIP Code'].isin(missing_zip_list)]
+    missing_zip_df = df[df['ZIP Code'].isin(missing_zip_list)].sort_values(by="State")
 
     with st.expander("See unmapped zips:"):
         st.write(missing_zip_df)
