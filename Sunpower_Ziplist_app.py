@@ -122,6 +122,7 @@ def main_dashboard():
             geojson_url = f'{base_url}{geojson_filename}'
         
             response = requests.get(geojson_url)
+            st.write(response)
             if response.status_code == 200:
                 with open(os.path.join(geojson_dir, geojson_filename), 'wb') as f:
                     f.write(response.content)
